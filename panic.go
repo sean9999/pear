@@ -3,6 +3,7 @@ package pear
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"runtime/debug"
 
@@ -24,5 +25,8 @@ func NicePanic(w io.Writer) {
 
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "\t")
-	enc.Encode(goroutines)
+	err := enc.Encode(goroutines)
+	if err != nil {
+		fmt.Fprintf(w, "%s\n", stack)
+	}
 }

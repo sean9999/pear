@@ -15,6 +15,7 @@ func (m *Multipear) As(target any) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -24,6 +25,7 @@ func (m *Multipear) Is(target error) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -40,10 +42,12 @@ func (m *Multipear) Error() string {
 	for _, e := range m.errors {
 		str += e.Error() + "\n"
 	}
+
 	return str
 }
 
 func (m *Multipear) Unwind() []*Pear {
+
 	return m.errors
 }
 
@@ -52,6 +56,7 @@ func (m *Multipear) Unwrap() []error {
 	for i, merr := range m.Unwind() {
 		errs[i] = merr
 	}
+
 	return errs
 }
 
@@ -64,10 +69,12 @@ func (m *Multipear) Trace() []ErrorWithStackFrame {
 			Message:    e.msg,
 		}
 	}
+
 	return frames
 }
 
 func (m *Multipear) Dump() string {
 	j, _ := json.MarshalIndent(m.errors, "", "\t")
+
 	return string(j)
 }

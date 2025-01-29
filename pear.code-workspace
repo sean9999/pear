@@ -13,5 +13,10 @@
 			"path": "../service1"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"go.lintTool": "golangci-lint",
+		"go.lintFlags": [
+			"--fast"
+		]
+	}
 }

@@ -3,7 +3,6 @@ package pear
 import (
 	"errors"
 	"fmt"
-	"regexp"
 )
 
 /**
@@ -46,13 +45,7 @@ func Join(errs ...error) error {
 	return &Multipear{pears}
 }
 
-// message from fmtstring, without distractions
-func withoutTokens(instr string) string {
-	pat := regexp.MustCompile(`\s*\%w\s*`)
-	outstr := pat.ReplaceAllString(instr, "")
-	return outstr
-}
-
+//nolint:err113
 func Errorf(fmtstring string, args ...any) error {
 	var n int
 	for i, a := range args {
@@ -65,6 +58,7 @@ func Errorf(fmtstring string, args ...any) error {
 			//thisErr = p
 		}
 	}
+
 	return fmt.Errorf(fmtstring, args...)
 }
 

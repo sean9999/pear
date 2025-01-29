@@ -13,7 +13,6 @@ var _ SingleError = (*Pear)(nil)
 type Pear struct {
 	child    *Pear
 	msg      string
-	stack    []uintptr // do we need this?
 	frame    *StackFrame
 	distance int // distance from callstack position
 }
@@ -57,6 +56,7 @@ func (p *Pear) Error() string {
 func IsPear(e error) bool {
 	var pear *Pear
 	is := errors.As(e, &pear)
+
 	return is
 }
 
@@ -72,6 +72,7 @@ func AsPear(e error, offset int) *Pear {
 	ok := errors.As(e, &pe)
 	if ok {
 		pe.ensureStackFrame(offset)
+
 		return pe
 	}
 	p := Pear{
@@ -79,6 +80,7 @@ func AsPear(e error, offset int) *Pear {
 		msg:   e.Error(),
 	}
 	p.Stack(offset)
+
 	return &p
 }
 
@@ -101,6 +103,7 @@ func (p *Pear) Unwrap() error {
 	if p == nil {
 		return nil
 	}
+
 	return p.child
 }
 
@@ -119,6 +122,7 @@ func (p *Pear) Unwind() []*Pear {
 		pears = append(pears, q)
 		q = q.child
 	}
+
 	return pears
 }
 
@@ -132,12 +136,14 @@ func (p *Pear) Trace() []ErrorWithStackFrame {
 			Message:    p.msg,
 		}
 	}
+
 	return truncateRecords(frames)
 }
 
 // Dump a JSON formatted output of the stack trace
 func (p *Pear) Dump() string {
 	j, _ := json.MarshalIndent(p.Trace(), "", "\t")
+
 	return string(j)
 }
 
@@ -161,15 +167,18 @@ func (p *Pear) Stack(offset int) *StackFrame {
 		}
 		p.frame = &sf
 	}
+
 	return p.frame
 }
 
 func (p *Pear) Throw(offset int) *Pear {
 	p.ensureStackFrame(offset)
+
 	return p
 }
 
 func Dump(e error) string {
 	pear := AsPear(e, 0)
+
 	return pear.Dump()
 }

@@ -1,0 +1,19 @@
+linters-settings:
+  # custom:
+  #   foo:
+  #     type: "module"
+  #     description: This is an example usage of a plugin linter.
+  #     settings:
+  #       message: hello
+
+linters:
+  disable-all: false
+  enable:
+    - zerologlint
+    - cyclop
+    - copyloopvar
+    - nilerr
+    - nilnesserr
+    - nilnil
+    - dupl
+    - err113
