@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "Pear",
+			"path": "."
+		},
+		{
+			"name": "Fruit",
+			"path": "../fruit"
+		},
+		{
+			"name": "Service 1",
+			"path": "../service1"
+		}
+	],
+	"settings": {}
+}

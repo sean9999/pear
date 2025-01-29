@@ -1,0 +1,10 @@
+version: v1.57.0
+plugins:
+  # a plugin from a Go proxy
+  - module: 'github.com/golangci/plugin1'
+    import: 'github.com/golangci/plugin1/foo'
+    version: v1.0.0
+
+  # a plugin from local source
+  - module: 'github.com/golangci/plugin2'
+    path: /my/local/path/plugin2
