@@ -1,8 +1,0 @@
-version: v1.57.0
-plugins:
-  # a plugin from a Go proxy
-  - module: 'https://github.com/golangci/example-plugin-module-linter'
-    import: 'https://github.com/golangci/example-plugin-module-linter/linters'
-    version: v1.0.0
-
-  # a plugin from local source
