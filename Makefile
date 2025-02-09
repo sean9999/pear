@@ -1,11 +1,12 @@
-REPO=$$(git remote -v | head -n 1 | cut -f 2 | cut -f 1 -d ' '| cut -c 5-)
+MODULE=github.com/sean9999/pear
+#REPO=$$(git remote -v | head -n 1 | cut -f 2 | cut -f 1 -d ' '| cut -c 5-)
 SEMVER := $$(git tag --sort=-version:refname | head -n 1)
 BRANCH := $$(git branch --show-current)
 REF := $$(git describe --dirty --tags --always)
 GOPROXY=proxy.golang.org
 
 info:
-	@printf "REPO:\t%s\nSEMVER:\t%s\nBRANCH:\t%s\nREF:\t%s\n" $(REPO) $(SEMVER) $(BRANCH) $(REF)
+	@printf "MODULE:\t%s\nSEMVER:\t%s\nBRANCH:\t%s\nREF:\t%s\n" $(MODULE) $(SEMVER) $(BRANCH) $(REF)
 
 tidy:
 	go mod tidy
@@ -22,7 +23,7 @@ docs: pkgsite
 	pkgsite -open .
 
 publish:
-	GOPROXY=https://${GOPROXY},direct go list -m ${REPO}@${SEMVER}
+	GOPROXY=https://$(GOPROXY),direct go list -m $(MODULE)@$(SEMVER)
 
 test:
 	git restore testdata
