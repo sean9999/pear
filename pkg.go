@@ -16,6 +16,9 @@ func New(msg string) *Pear {
 	return p
 }
 
+// use this for sentinal errors.
+// ex: var MyError = errors.New("something that is thrown later")
+// ex: var MyError = pear.Defer("something that is thrown later")
 func Defer(msg string) *Pear {
 	p := &Pear{msg: msg, distance: 1}
 	return p
@@ -54,36 +57,8 @@ func Errorf(fmtstring string, args ...any) error {
 			n++
 			p := AsPear(e, n)
 			args[i] = p
-			//thisErr.Wrap(p)
-			//thisErr = p
 		}
 	}
 
 	return fmt.Errorf(fmtstring, args...)
 }
-
-// drop-in replacement for [fmt.Errorf]
-// func Errorf(fmtstring string, args ...any) Error {
-// 	var n int
-
-// 	//err := Defer(withoutTokens(fmtstring))
-
-// 	err := Defer(fmtstring)
-
-// 	thisErr := err
-// 	for i, a := range args {
-// 		e, isError := a.(error)
-// 		if isError && e != nil {
-// 			n++
-// 			childPear := AsPear(e, n)
-// 			args[i] = childPear
-// 			thisErr.Wrap(childPear)
-// 			thisErr = childPear
-// 		}
-// 	}
-// 	pear := AsPear(err, 1)
-// 	if n <= 1 {
-// 		return pear
-// 	}
-// 	return NewMultiPear(pear.Unwind()...)
-// }
