@@ -23,35 +23,9 @@ type ErrorWithStackFrame struct {
 	*StackFrame
 }
 
-// func (p *Pear) Format(w fmt.State, v rune) {
-// 	switch v {
-// 	case 'w':
-// 		//	do it
-// 		io.WriteString(w, p.child.msg)
-// 	default:
-// 		fmtDirective := fmt.FormatString(w, v)
-
-// 		fmt.Fprintf(w, fmtDirective, p)
-// 		//io.WriteString(w, fmtDirective)
-// 	}
-// }
-
 func (p *Pear) Error() string {
 	return p.msg
 }
-
-// *Pear implements [errors.Error]
-// func (p *Pear) Error() string {
-// 	if p.child == nil {
-// 		return p.msg
-// 	}
-
-// 	//str := strings.Replace(p.msg, "%w", p.child.Error(), -1)
-
-// 	//return fmt.Sprintf(str)
-
-// 	return strings.Replace(p.msg, "%w", p.child.Error(), -1)
-// }
 
 func IsPear(e error) bool {
 	var pear *Pear
