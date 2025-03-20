@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Pear vet
+run-name: ${{ github.actor }} is vetting the code ☤
 on: [push, workflow_dispatch]
 jobs:
   vet:
