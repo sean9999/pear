@@ -1,5 +1,9 @@
 package pear
 
+import (
+	"github.com/pkg/errors"
+)
+
 // an Error is an error with a stack trace.
 type Error interface {
 	Error() string
@@ -20,4 +24,14 @@ type SingleError interface {
 type MultiError interface {
 	Error
 	Unwrap() []error
+}
+
+type WGError interface {
+	Err(error, error) error
+	Unwraps(error) []error
+	As(error, any) bool
+	Error() string
+	Unwrap() error
+	StackTrace() errors.StackTrace
+	Is(error) bool
 }
